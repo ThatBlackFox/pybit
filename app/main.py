@@ -1,7 +1,7 @@
 import json
 import sys
 
-def decode_bencode(bencoded_value):
+def decode_bencode(bencoded_value:bytes):
     if chr(bencoded_value[0]).isdigit():
         first_colon_index = bencoded_value.find(b":")
         if first_colon_index == -1:
@@ -9,7 +9,7 @@ def decode_bencode(bencoded_value):
         return bencoded_value[first_colon_index+1:]
     elif chr(bencoded_value[0])=='i':
         e_index = bencoded_value.find(b"e")
-        return bencoded_value[1:-e_index]
+        return int(bencoded_value[1:e_index])
     else:
         raise NotImplementedError("Only strings are supported at the moment")
 
